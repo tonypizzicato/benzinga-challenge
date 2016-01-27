@@ -1,4 +1,5 @@
 require('whatwg-fetch');
+import $ from 'jquery';
 import createAction from 'redux-actions/lib/createAction';
 
 export const API_CALL = Symbol('API Call');
@@ -37,16 +38,10 @@ function callApi(endpoint, method = 'get', body = {}) {
         }
     }
 
-    return fetch(fullUrl, params)
-        .then(checkStatus)
-        .then(response => response.json().then(json => ({ json, response })).catch(err => console.log(err)))
-        .then(({ json, response }) => {
-            if (!response.ok) {
-                return Promise.reject(json);
-            }
-
-            return json;
-        });
+    return $.ajax({
+        url:      fullUrl,
+        dataType: 'jsonp'
+    });
 }
 
 
@@ -75,8 +70,13 @@ export default store => next => action => {
     next(createAction(requestType)());
 
     return callApi(endpoint, method, action.payload).then(
-        response => {
-            return next(createAction(successType)(response))
+        data => {
+            var error = data[Object.keys(data)[0]].error;
+            if (!!error) {
+                return next(createAction(failureType)(error.message || 'Something bad happened'))
+            }
+
+            return next(createAction(successType)(data))
         },
         error => {
             return next(createAction(failureType)(error.message || 'Something bad happened'))
