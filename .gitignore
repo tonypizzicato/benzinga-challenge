@@ -1,0 +1,5 @@
+.idea
+.tmp
+.yo-rc.json
+node_modules
+npm-debug.log
