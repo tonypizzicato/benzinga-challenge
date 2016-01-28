@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "build": "gulp build",
     "serve": "gulp serve",
     "server": "node_modules/.bin/babel-node server/server.js"
   },
