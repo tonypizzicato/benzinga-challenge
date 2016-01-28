@@ -1,18 +1,15 @@
-import { API_CALL } from '../middlewares/fetchMiddleware';
+import { createAction } from 'redux-actions';
 
-export const SEARCH_FETCH         = 'SEARCH_FETCH';
-export const SEARCH_FETCH_SUCCESS = 'SEARCH_FETCH_SUCCESS';
-export const SEARCH_FETCH_FAILURE = 'SEARCH_FETCH_FAILURE';
+import stock from './stock';
+
+export const SEARCH = 'SEARCH';
 
 function search(token) {
-    return {
-        [API_CALL]: {
-            types:    [SEARCH_FETCH, SEARCH_FETCH_SUCCESS, SEARCH_FETCH_FAILURE],
-            endpoint: `http://careers-data.benzinga.com/rest/richquote?symbols=${token.toUpperCase()}`,
-            method:   'GET'
-        }
+    return function (dispatch) {
+        dispatch(createAction(SEARCH)(token));
+        dispatch(stock.fetch(token));
     }
-}
+};
 
 export default {
     search

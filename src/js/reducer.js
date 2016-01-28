@@ -1,11 +1,7 @@
-import { handleActions } from 'redux-actions';
-
 import { routeReducer } from 'redux-simple-router';
 
-import INITIAL_STATE from '../../config/state.json';
-
-import uiReducer from './reducers/ui';
-/** inject:reducer-import */
+import searchReducer from './reducers/search';
+import stockReducer from './reducers/stock';
 
 /**
  * Main application reducer function.
@@ -18,12 +14,12 @@ import uiReducer from './reducers/ui';
  *
  * @returns {Object} New app state
  */
-const reducer = function (state = fromJS(INITIAL_STATE), action) {
+const reducer = function (state, action) {
     return state.merge({
         routing: routeReducer(state.get('routing').toJS(), action),
 
-        ui: uiReducer(state.get('ui'), action),
-        /** inject:reducer */
+        search: searchReducer(state.get('search'), action),
+        stock:  stockReducer(state.get('stock'), action)
     });
 }
 

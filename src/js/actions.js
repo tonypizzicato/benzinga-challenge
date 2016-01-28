@@ -1,16 +1,9 @@
 import search from './actions/search';
+import stock from './actions/stock';
 
 /**
  * Application actions, that can mutate app state.
  * Action is just a plain object with type and [optional] payload.
- *
- * @example
- * const myAction = {
- * .."type": 'INITIALIZE_APP',
- * .."payload": {
- * ....."initialized": true
- * ..}
- * }
  *
  * When object of this action is emitted, it can be handled by reducer by actions type.
  * Such reducer can mutate the state of an app according to action type or payload if needed.
@@ -19,7 +12,8 @@ import search from './actions/search';
  * More about actions: {@link http://rackt.org/redux/docs/basics/Actions.html Actions}
  */
 const actions = {
-    search: search
+    search: search,
+    stock:  stock
 };
 
 export default actions;

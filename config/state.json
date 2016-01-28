@@ -2,7 +2,14 @@
   "routing": {
     "location": ""
   },
-  "ui":     {
+  "search":  "",
+  "stock":   {
+    "isFetching": false,
+    "value":      null,
+    "error":      null
+  },
+  "balance": 1000000,
+  "ui":      {
     "menuOpened": false
   }
 }

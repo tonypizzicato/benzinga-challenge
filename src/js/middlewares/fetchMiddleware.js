@@ -76,7 +76,7 @@ export default store => next => action => {
                 return next(createAction(failureType)(error.message || 'Something bad happened'))
             }
 
-            return next(createAction(successType)(data))
+            return next(createAction(successType)(data[Object.keys(data)[0]]))
         },
         error => {
             return next(createAction(failureType)(error.message || 'Something bad happened'))

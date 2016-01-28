@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
 import Search from './Search.jsx';
+import Stock from './Stock.jsx';
+import StockActions from './StockActions.jsx';
 
 /**
  * Page content container component
@@ -14,6 +16,8 @@ class App extends Component {
                 </main>
                 <aside>
                     <Search/>
+                    <Stock/>
+                    <StockActions/>
                 </aside>
             </div>
         )
