@@ -8,6 +8,7 @@ import util from 'gulp-util';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.development';
+import webpackProdConfig from './webpack.production';
 import packageJson from './package.json';
 
 const PORT = process.env.PORT || 3000;
@@ -76,6 +77,20 @@ gulp.task('webpack', function () {
             throw new util.PluginError('webpack', err);
         }
         util.log("[webpack-dev-server]", `http://localhost:${PORT}/`);
+    });
+});
+
+gulp.task('build', callback => {
+    const PATH = 'dist';
+    const myConfig = Object.create(webpackProdConfig(PATH));
+
+    // run webpack
+    webpack(myConfig, (err, stats) => {
+        if (err) throw new util.PluginError("webpack:build", err);
+        util.log("[build]", stats.toString({
+            colors: true
+        }));
+        callback();
     });
 });
 
