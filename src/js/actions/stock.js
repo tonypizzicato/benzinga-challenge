@@ -12,7 +12,7 @@ function fetchStock(token, quite = false) {
     return {
         [API_CALL]: {
             types:    [fetchType, STOCK_FETCH_SUCCESS, STOCK_FETCH_FAILURE],
-            endpoint: `http://careers-data.benzinga.com/rest/richquote`,
+            endpoint: `//careers-data.benzinga.com/rest/richquote`,
             method:   'GET'
         },
         payload:    { symbols: token }
