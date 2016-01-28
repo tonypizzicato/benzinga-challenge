@@ -27,6 +27,7 @@
 
 @import '~normalize.css/normalize.css';
 @import "~material-design-icons/iconfont/material-icons.css";
+@import 'table/_table';
 
 *, *:after, *::before {
   -moz-box-sizing: border-box;
@@ -39,6 +40,7 @@ html, body, .app, .app__container, .page, .page__content, .page__content-pusher 
 
 body {
   background:  #B4CBDD;
+  color:       #9E9494;
   font-size:   14px;
   font-family: 'Lato', sans-serif;
 }
@@ -70,9 +72,6 @@ body {
   font-size: 36px;
 }
 
-@import 'menu/_menu';
-@import 'table/_table';
-
 .page__content-container {
   width:  960px;
   margin: 0 auto;
@@ -81,9 +80,10 @@ body {
 
 main,
 aside {
-  position: relative;
-  float:    left;
-  height:   80%;
+  position:   relative;
+  float:      left;
+  min-height: 600px;
+  padding:    20px;
 }
 
 main {
@@ -105,15 +105,22 @@ aside {
   text-shadow: 0 .1em .1em rgba(0, 0, 0, .3);
 }
 
-.search {
-  display:     block;
-  width:       100%;
-  border:      none;
-  padding:     20px;
-  line-height: 2;
+.search,
+.account,
+.stock-actions__amount {
+  display:       block;
+  width:         100%;
+  border:        none;
+  margin-bottom: 40px;
+  color:         #9E9494;
+  text-shadow:   0 1px #fff;
+  line-height:   2;
 }
 
-.search::after {
+.search::after,
+.account::after,
+.stock-actions__amount::after,
+.stock-actions__amount::before {
   content:       '';
   position:      relative;
   display:       block;
@@ -121,7 +128,12 @@ aside {
   border-bottom: 1px solid #E5E5E5;
 }
 
-.search__input {
+.account > span {
+  margin-left: 10px;
+}
+
+.search__input,
+.stock-actions__input {
   border:         none;
   width:          100%;
   height:         30px;
@@ -130,11 +142,20 @@ aside {
   letter-spacing: .03em;
 }
 
-::-webkit-input-placeholder {
-  color: #ccc;
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin:             0;
 }
 
-.search__input:focus {
+::-webkit-input-placeholder {
+  color:      #ccc;
+  font-size:  14px;
+  transition: font-size .1s;
+}
+
+.search__input:focus,
+.stock-actions__input:focus {
   outline: none;
 }
 
@@ -155,8 +176,8 @@ aside {
 
 .stock {
   position:      relative;
-  width:         240px;
-  margin:        20px auto;
+  width:         100%;
+  margin:        20px auto 40px;
   height:        230px;
   background:    #eee;
   border-radius: 6px;
@@ -211,12 +232,58 @@ aside {
   text-align: center;
 }
 
+.stock-actions__amount {
+  text-align: center;
+  width:      150px;
+  margin:     0 auto;
+}
+
+.stock-actions__amount::after {
+  top: 5px;
+}
+
+.stock-actions__amount::before {
+  top:           37px;
+  z-index:       1;
+  transform:     scale(0);
+  transition:    transform .1s;
+  border-bottom: 1px solid #ff3005;
+}
+
+.stock-actions__amount.stock-actions__amount_status_error::before {
+  transform: scale(1);
+}
+
+.stock-actions__input {
+  font-size:   1.4em;
+  text-align:  center;
+  text-shadow: 0 1px #fff;
+}
+
+.stock-actions__input::-webkit-input-placeholder {
+  color:      #ccc;
+  font-size:  1em;
+  transition: transform .2s;
+  transform:  scale(.8);
+}
+
+.stock-actions__input:focus::-webkit-input-placeholder {
+  transform: scale(1);
+}
+
+.stock-actions__input:disabled {
+  background: none;
+  color:      #9E9494;
+}
+
 .stock-actions__button {
   display:       inline-block;
-  width:         100px;
+  position:      relative;
+  width:         104px;
   margin:        20px;
+  padding:       0;
   font-size:     1.2em;
-  line-height:   3em;
+  line-height:   3.4em;
   border:        none;
   border-radius: 6px;
   background:    #eee;
@@ -226,11 +293,13 @@ aside {
 }
 
 .stock-actions__button_type_buy {
-  background: #25D265;
+  background:  #25D265;
+  margin-left: 0;
 }
 
 .stock-actions__button_type_sell {
-  background: #F45531;
+  background:   #F45531;
+  margin-right: 0;
 }
 
 .stock-actions__button_type_buy:hover,
@@ -257,6 +326,53 @@ aside {
 .stock-actions__button:disabled:hover,
 .stock-actions__button:disabled:active {
   opacity: 1;
+}
+
+.stock-actions__button_label {
+  display:    inline-block;
+  transition: transform .2s;
+}
+
+.stock-actions__button_with-price .stock-actions__button_label {
+  transform: translateY(-5px);
+}
+
+.stock-actions__button_price {
+  font-size:     .8em;
+  display:       block;
+  position:      absolute;
+  top:           15px;
+  width:         100%;
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  word-wrap:     normal;
+  opacity:       0;
+
+  transform:     translateY(15px) scale(0);
+
+  transition:    transform .2s, opacity .2s;
+}
+
+.stock-actions__button_with-price .stock-actions__button_price {
+  opacity:    1;
+  transform:  translateY(0) scale(1);
+
+  transition: transform .2s, opacity .2s;
+}
+
+.portfolio {
+  width:      100%;
+  background: none;
+}
+
+.portfolio th,
+.portfolio td {
+  background: none;
+}
+
+.portfolio th:not(:first-child),
+.portfolio td:not(:first-child) {
+  text-align: right;
 }
 
 /* animation */

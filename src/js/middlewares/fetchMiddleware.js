@@ -67,7 +67,7 @@ export default store => next => action => {
 
     const [ requestType, successType, failureType ] = types;
 
-    next(createAction(requestType)());
+    next(createAction(requestType)(action.payload));
 
     return callApi(endpoint, method, action.payload).then(
         data => {

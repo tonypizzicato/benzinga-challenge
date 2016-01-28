@@ -1,15 +1,14 @@
 {
-  "routing": {
+  "routing":   {
     "location": ""
   },
-  "search":  "",
-  "stock":   {
+  "search":    "",
+  "stock":     {
     "isFetching": false,
+    "symbol":     "",
     "value":      null,
     "error":      null
   },
-  "balance": 1000000,
-  "ui":      {
-    "menuOpened": false
-  }
+  "balance":   1000000,
+  "portfolio": []
 }

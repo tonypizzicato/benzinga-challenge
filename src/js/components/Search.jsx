@@ -7,12 +7,16 @@ import actions from '../actions';
 class Search extends Component {
 
     _onClick = () => {
-        this.props.search(this.refs.input.value);
+        const needle = this.refs.input.value;
+        if (!!needle.length) {
+            this.props.search(needle);
+        }
     };
 
     _onSearch = event => {
-        if (event.keyCode == 13) {
-            this.props.search(this.refs.input.value);
+        const needle = this.refs.input.value;
+        if (event.keyCode == 13 && !!needle.length) {
+            this.props.search(needle);
         }
     };
 

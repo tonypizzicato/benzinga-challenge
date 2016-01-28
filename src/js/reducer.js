@@ -2,6 +2,8 @@ import { routeReducer } from 'redux-simple-router';
 
 import searchReducer from './reducers/search';
 import stockReducer from './reducers/stock';
+import accountReducer from './reducers/account';
+import portfolioReducer from './reducers/portfolio';
 
 /**
  * Main application reducer function.
@@ -18,8 +20,10 @@ const reducer = function (state, action) {
     return state.merge({
         routing: routeReducer(state.get('routing').toJS(), action),
 
-        search: searchReducer(state.get('search'), action),
-        stock:  stockReducer(state.get('stock'), action)
+        search:    searchReducer(state.get('search'), action),
+        stock:     stockReducer(state.get('stock'), action),
+        balance:   accountReducer(state.get('balance'), action),
+        portfolio: portfolioReducer(state.get('portfolio'), action)
     });
 }
 
