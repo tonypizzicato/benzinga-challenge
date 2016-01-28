@@ -1,7 +1,4 @@
 {
-  "routing":   {
-    "location": ""
-  },
   "search":    "",
   "stock":     {
     "isFetching": false,

@@ -7,7 +7,7 @@
     "test": "mocha",
     "serve": "gulp serve",
     "server": "node_modules/.bin/babel-node server/server.js",
-    "build": "gulp build"
+    "build": "NODE_ENV=production gulp build"
   },
   "license": "ISC",
   "dependencies": {
@@ -23,13 +23,11 @@
     "react-addons-perf": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.0.6",
-    "react-router": "^2.0.0-rc5",
     "react-tap-event-plugin": "^0.2.1",
     "redux": "^3.0.6",
     "redux-actions": "^0.9.1",
     "redux-devtools": "^3.0.1",
     "redux-logger": "^2.4.0",
-    "redux-simple-router": "^2.0.4",
     "redux-thunk": "^1.0.3",
     "whatwg-fetch": "^0.11.0"
   },
